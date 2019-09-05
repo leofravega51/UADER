@@ -1,0 +1,5 @@
+﻿--Liste los empleados los cuales su apellido comiencen con la letra 'R'
+
+SELECT *
+FROM empleado e
+WHERE(e.apellido LIKE 'R%')

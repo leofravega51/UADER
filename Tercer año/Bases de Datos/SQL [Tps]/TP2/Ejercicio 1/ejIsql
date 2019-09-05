@@ -1,0 +1,8 @@
+﻿--i) Hallar los fabricantes de la computadora (PC o laptop) con la máxima velocidad disponible.
+
+
+SELECT p.fabricante
+FROM producto p INNER JOIN pc ON(p.cod = pc.cod AND pc.veloc =ALL(SELECT MAX(pc.veloc) FROM pc))
+UNION
+(SELECT p.fabricante
+FROM producto p INNER JOIN laptop l ON(p.cod = l.cod AND l.veloc =ALL(SELECT MAX(l.veloc) FROM laptop l)))

@@ -1,28 +1,29 @@
-const instance = axios.create({
+const axios = require('axios')
 
-    baseURL:`https://devru-latitude-longitude-find-v1.p.rapidapi.com/latlon.php?location=${encodeUrl}` ,
-    headers: {"x-rapidapi-key":"4c5d9a7485mshc2efc78f5bb962cp17717cjsnc4679932c05e"}
-})
+const getLugarLatLng = async(dir) => {
+    const instance = axios.create({
 
-const resp = await instance.get();
+        baseURL: `https://devru-latitude-longitude-find-v1.p.rapidapi.com/latlon.php?location=${dir}`,
+        headers: { 'x-rapidapi-key': '7d1243865bmsh039c41f506b55e3p169457jsn33089d79f664' }
+    })
 
-if(resp.data.Result.length === 0){
-    throw new Error(`No hay resultados para ${dir}`)
+    const resp = await instance.get();
+    if (resp.data.Results.length == 0) {
+        throw new Error(`No hay resultados para ${dir}`)
+    }
+
+
+    const data = resp.data.Results[0];
+    const direccion = data.name
+    const lat = data.lat
+    const lng = data.lon
+
+    return {
+        direccion,
+        lat,
+        lng
+    }
 }
-
-let geoLocalizacion = {
-    lat: '',
-    long: ''
+module.exports = {
+    getLugarLatLng
 }
-
-instance.get()
-.then( resp => {
-    geoLocalizacion.lat = resp.data[0].lat;
-    geoLocalizacion.long = resp.data[0].long;
-    
-})
-
-    .catch(err => {
-        console.log('ERROR!!', err);
-        
-    });

@@ -17,15 +17,20 @@ const argv = require('yargs').options({
 
 const encodeUlr = encodeURI(argv.direccion)
 
-const getInfo = (direccion) => {
+let getInfo = async (direccion) => {
+
+    try {
+        
+        let coords = await lugar.getLugarLatLng(direccion);
+        let temp = await clima.getClima(coords.lat, coords.lng);
+
+        return `El clima en ${coords.direccion} es de ${temp}`;
+    } catch (e) {
+        return `No se puede determinar el clima en ${direccion}`
+    }
 
 }
 
-clima.getClima('-31.389999', '-58.029999')
-    .then(console.log)
-    .catch(console.log)
-
-console.log(encodeUlr);
-
-lugar.getLugarLatLng(argv.direccion)
-    .then(console.log)
+getInfo(argv.direccion)
+    .then(mensaje => console.log(mensaje))
+    .catch(e => console.log(e));

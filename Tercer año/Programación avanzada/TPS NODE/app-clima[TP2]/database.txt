@@ -1,2 +1,1 @@
-Localidad : Concordia, Temperatura : 301.03, Presion : 1008, Humedad : 74Localidad : Corrientes, Temperatura : 294.15, Presion : 1010, Humedad : 100 
-Localidad : Corrientes, Temperatura : 294.15, Presion : 1010, Humedad : 100 
+{"Registros":[{"Localidad":"Concordia","Temperatura":295.07,"Presion":1011,"Humedad":88},{"Localidad":"Paso de los libres","Temperatura":297.15,"Presion":1011,"Humedad":78}]}
